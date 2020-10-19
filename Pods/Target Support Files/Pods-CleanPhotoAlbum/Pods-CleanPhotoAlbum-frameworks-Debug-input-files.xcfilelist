@@ -1,0 +1,4 @@
+${PODS_ROOT}/Target Support Files/Pods-CleanPhotoAlbum/Pods-CleanPhotoAlbum-frameworks.sh
+${BUILT_PRODUCTS_DIR}/Cache/Cache.framework
+${BUILT_PRODUCTS_DIR}/Imaginary/Imaginary.framework
+${BUILT_PRODUCTS_DIR}/Lightbox/Lightbox.framework
