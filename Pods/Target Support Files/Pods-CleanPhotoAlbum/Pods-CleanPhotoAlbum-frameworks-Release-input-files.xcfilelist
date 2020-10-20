@@ -1,4 +1,7 @@
 ${PODS_ROOT}/Target Support Files/Pods-CleanPhotoAlbum/Pods-CleanPhotoAlbum-frameworks.sh
-${BUILT_PRODUCTS_DIR}/Cache/Cache.framework
-${BUILT_PRODUCTS_DIR}/Imaginary/Imaginary.framework
-${BUILT_PRODUCTS_DIR}/Lightbox/Lightbox.framework
+${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework
+${BUILT_PRODUCTS_DIR}/ImageViewer.swift/ImageViewer_swift.framework
+${BUILT_PRODUCTS_DIR}/Moya/Moya.framework
+${BUILT_PRODUCTS_DIR}/PromiseKit/PromiseKit.framework
+${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework
+${BUILT_PRODUCTS_DIR}/SwiftSpinner/SwiftSpinner.framework
