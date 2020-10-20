@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "PhotoGalleryViewController.displayAlbumPhotos(viewModel:):PhotoGalleryViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.lbcontroller.images">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "PhotoGalleryViewController.collectionView(_:cellForItemAt:):PhotoGalleryViewController.swift">
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>
