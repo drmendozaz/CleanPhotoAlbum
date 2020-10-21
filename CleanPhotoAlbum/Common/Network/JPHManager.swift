@@ -17,10 +17,10 @@ struct JPHManager: GeneralAPI {
     
     /// Generic function to call API endpoints using moya and decodable protocol
     ///
-    /// - Parameters:
+    ///   - Parameters:
     ///   - target: The network moya target endpoint to call
     ///   - dataReturnType: The typpe of data that is expected to parse from endpoint response
-    /// - Returns: A promise containing the dataReturnType set in function params
+    ///   - Returns: A promise containing the dataReturnType set in function params
     static func callApi<Target: TargetType, ReturnedObject: Decodable>(_ target: Target, dataReturnType: ReturnedObject.Type) -> Promise<ReturnedObject> {
         
         let provider = MoyaProvider<Target>(plugins: [CachePolicyPlugin()])
@@ -29,9 +29,9 @@ struct JPHManager: GeneralAPI {
             provider.request(target) { result in
                 switch result {
                 case let .success(response):
-                    let decoder = JSONDecoder()
                     do {
-                        let results = try decoder.decode(ReturnedObject.self, from: response.data)
+                        let successfulRes = try response.filterSuccessfulStatusCodes()
+                        let results = try successfulRes.map(ReturnedObject.self)
                         seal.fulfill(results)
                     } catch {
                         seal.reject(error)

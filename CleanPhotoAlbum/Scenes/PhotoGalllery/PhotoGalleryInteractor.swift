@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Moya
 
 protocol PhotoGalleryBusinessLogic {
     func fetchAlbumPhotos(request: PhotoGalleryModels.FetchAlbumPhotos.Request)
@@ -32,11 +33,21 @@ class PhotoGalleryInteractor: PhotoGalleryBusinessLogic, PhotoGalleryDataStore {
     
     func fetchAlbumPhotos(request: Models.FetchAlbumPhotos.Request){
         var response: Models.FetchAlbumPhotos.Response!
+        var er: Models.PhotoGalleryError!
         
         worker.getPhotosByAlbumId(albumId: request.albumId).done{ photos in
             response = Models.FetchAlbumPhotos.Response(photos: photos)
         }.catch { error in
-            
+            switch error{
+            case MoyaError.underlying( _ as NSError, _):
+                er = Models.PhotoGalleryError(type: .networkError)
+                er.message = error.localizedDescription
+                response = Models.FetchAlbumPhotos.Response(photos: [], error: er)
+            default:
+                er = Models.PhotoGalleryError(type: .unknown)
+                er.message = error.localizedDescription
+                response = Models.FetchAlbumPhotos.Response(photos: [], error: er)
+            }
         }.finally {
             self.presenter?.presentFetchAlbumPhotos(response: response)
         }
@@ -46,11 +57,21 @@ class PhotoGalleryInteractor: PhotoGalleryBusinessLogic, PhotoGalleryDataStore {
 
     func fetchAlbums(request: Models.FetchAlbums.Request) {
         var response: Models.FetchAlbums.Response!
+        var er: Models.PhotoGalleryError!
         
         worker.getAllAlbums().done{ albums in
             response = Models.FetchAlbums.Response(albums: albums)
         }.catch { error in
-            
+            switch error{
+            case MoyaError.underlying( _ as NSError, _):
+                er = Models.PhotoGalleryError(type: .networkError)
+                er.message = error.localizedDescription
+                response = Models.FetchAlbums.Response(albums: [], error: er)
+            default:
+                er = Models.PhotoGalleryError(type: .unknown)
+                er.message = error.localizedDescription
+                response = Models.FetchAlbums.Response(albums: [], error: er)
+            }
         }.finally {
             self.presenter?.presentFetchAlbums(response: response)
         }

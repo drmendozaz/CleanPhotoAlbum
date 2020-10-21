@@ -9,14 +9,6 @@
 import UIKit
 
 enum PhotoGalleryModels {
-    
-    struct DisplayedPhoto {
-        var albumId: Int
-        var id: Int
-        var title: String
-        var url: URL?
-        var thumbnailUrl: URL?
-    }
 
     // MARK: - Use Cases
 
@@ -27,6 +19,7 @@ enum PhotoGalleryModels {
 
         struct Response {
             var photos: Photos
+            var error: PhotoGalleryError?
         }
 
         struct ViewModel {
@@ -41,12 +34,31 @@ enum PhotoGalleryModels {
 
         struct Response {
             var albums: Albums
+            var error: PhotoGalleryError?
         }
 
         struct ViewModel {
             var albums: Albums
         }
     }
+    
+    // MARK: - Types
 
+    typealias PhotoGalleryError = Error<PhotoGalleryErrorType>
+
+    
+    enum PhotoGalleryErrorType {
+        case networkError
+        case unknown
+    }
+
+    struct Error<T> {
+        var type: T
+        var message: String?
+
+        init(type: T) {
+            self.type = type
+        }
+    }
 
 }

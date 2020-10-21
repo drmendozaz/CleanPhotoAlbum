@@ -14,6 +14,7 @@ import SwiftSpinner
 protocol PhotoGalleryDisplayLogic: class {
     func displayAlbumPhotos(viewModel: PhotoGalleryModels.FetchAlbumPhotos.ViewModel)
     func displayAlbums(viewModel: PhotoGalleryModels.FetchAlbums.ViewModel)
+    func displayErrorMessage(message: String)
 }
 
 class PhotoGalleryViewController: UIViewController, PhotoGalleryDisplayLogic {
@@ -25,7 +26,7 @@ class PhotoGalleryViewController: UIViewController, PhotoGalleryDisplayLogic {
     var interactor: PhotoGalleryBusinessLogic?
     
     private var isAlbumListOpen = false
-    private var images: [Models.DisplayedPhoto]?
+    private var images: [DisplayedPhoto]?
     private var albums: Albums?
     private var imageurls: [URL]?
     
@@ -154,6 +155,13 @@ class PhotoGalleryViewController: UIViewController, PhotoGalleryDisplayLogic {
         setupFetchAlbumPhotos(albumId: String(viewModel.albums.first!.id) )
     }
     
+    func displayErrorMessage(message: String) {
+        SwiftSpinner.hide()
+        let alert = UIAlertController(title: "", message: message, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+        alert.addAction(okAction)
+        present(alert, animated: true, completion: nil)
+    }
 }
 
 extension PhotoGalleryViewController: UITableViewDelegate, UITableViewDataSource {
